@@ -22,7 +22,7 @@
     "reactflow": "^11.11.4",
     "recharts": "^2.12.3",
     "simplex-noise": "^4.0.1",
-    "three": "^0.163.0"
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

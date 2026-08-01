@@ -1,6 +1,6 @@
 import { useRef, useMemo, useLayoutEffect, Suspense } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
+import Composer from './Composer';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 
@@ -1237,10 +1237,10 @@ export default function Brain3D({
           />
         </Suspense>
 
-        <EffectComposer>
-          <Bloom intensity={0.9} luminanceThreshold={0.15} luminanceSmoothing={0.4} mipmapBlur />
-          <Vignette eskil={false} offset={0.25} darkness={0.65} />
-        </EffectComposer>
+        <Composer
+          bloomOptions={{ intensity: 0.9, luminanceThreshold: 0.15, luminanceSmoothing: 0.4, mipmapBlur: true }}
+          vignetteOptions={{ eskil: false, offset: 0.25, darkness: 0.65 }}
+        />
       </Canvas>
 
       <div
