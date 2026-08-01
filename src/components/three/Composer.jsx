@@ -17,12 +17,11 @@ export default function Composer({
   const { gl, scene, camera, size } = useThree();
 
   useEffect(() => {
-    // Better compatibility with postprocessing
+    // Prevent renderer from clearing before postprocessing
     gl.autoClear = false;
 
     const composer = new EffectComposer(gl);
 
-    composer.setPixelRatio(window.devicePixelRatio);
     composer.setSize(size.width, size.height);
 
     const renderPass = new RenderPass(scene, camera);
@@ -53,14 +52,13 @@ export default function Composer({
       composer.dispose();
       composerRef.current = null;
     };
-  }, [gl, scene, camera]);
+  }, [gl, scene, camera, size.width, size.height, bloomOptions, vignetteOptions]);
 
   useEffect(() => {
     if (!composerRef.current) return;
 
-    composerRef.current.setPixelRatio(window.devicePixelRatio);
     composerRef.current.setSize(size.width, size.height);
-  }, [size]);
+  }, [size.width, size.height]);
 
   useFrame(() => {
     composerRef.current?.render();
